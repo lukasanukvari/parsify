@@ -4,16 +4,16 @@ Stop writing multiple parser scripts for parsing different websites.
 With __Parsify__ you can have a single few lines script and the configuration file to fit your parser to different websites.
 
 ## Contents
-* [Installation](#Installation)
-* [Usage](#Usage)
-* [Handbook Tutorial](#Handbook-Tutorial)
-  * [Required Fields](#Required-Fields)
-  * [Advanced Fields](#Advanced-Fields)
-  * [Simple Example](#Simple-Example)
-  * [Advanced Example](#Advanced-Example)
-* [Contact](#Contact)
-* [License](#License)
-* [Contributing](#Contributing)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Handbook Tutorial](#handbook-Tutorial)
+  * [Required Fields](#required-fields)
+  * [Advanced Fields](#advanced-fields)
+  * [Simple Example](#simple-example)
+  * [Advanced Example](#advanced-example)
+* [Contact](#contact)
+* [License](#license)
+* [Contributing](#contributing)
 
 ## Installation
 `pip install parsify`
