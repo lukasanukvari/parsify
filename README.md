@@ -65,7 +65,7 @@ final_result = ngn.parse()
 Distributed under the MIT License. See `LICENSE` file for more information.
 
 ## Contact
-Your Name - [@lukasanukvari](https://twitter.com/lukasanukvari) - luksosiashvili@gmail.com
+Luka Sosiashvili - [@lukasanukvari](https://twitter.com/lukasanukvari) - luksosiashvili@gmail.com
 
 Project Link: [https://github.com/lukasanukvari/parsify](https://github.com/lukasanukvari/parsify)
 
