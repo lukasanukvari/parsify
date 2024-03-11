@@ -62,7 +62,7 @@ final_result = ngn.parse()
   * ___"output"___ Dictionary: 
 
 ## License
-Distributed under the MIT License. See `LICENSE` file for more information.
+Distributed under the MIT License. See [`LICENSE`](./LICENSE) file for more information.
 
 ## Contact
 Luka Sosiashvili - [@lukasanukvari](https://twitter.com/lukasanukvari) - luksosiashvili@gmail.com
