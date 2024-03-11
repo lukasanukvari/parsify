@@ -4,7 +4,7 @@ from json import load, dumps
 
 
 class Handbook:
-    def __init__(self, book: dict | str):
+    def __init__(self, book: str | dict):
         self.handbook: dict = book if type(book) is dict else self.read_json(book)
         self.__validate_handbook()
 
@@ -57,9 +57,9 @@ class Handbook:
                     if 'standard' not in step['dynamic_variables']:
                         step['dynamic_variables']['standard'] = None
 
-                if not 'is_chain_final' in step['output']:
+                if 'is_chain_final' not in step['output']:
                     step['output']['is_chain_final'] = False
-                if not 'is_parser_final' in step['output']:
+                if 'is_parser_final' not in step['output']:
                     step['output']['is_parser_final'] = False
 
                 if 'key' not in step['output']:
@@ -69,8 +69,8 @@ class Handbook:
         return dumps(self.handbook, indent=4)
 
 
-class Parsify(Handbook):
-    def __init__(self, handbook: Handbook | dict | str):
+class Engine(Handbook):
+    def __init__(self, handbook: Handbook | str | dict):
         if type(handbook) is not Handbook:
             Handbook.__init__(self, book=handbook)
         else:
@@ -108,7 +108,7 @@ class Parsify(Handbook):
             return -1
 
         try:
-            response = self.__send_request().json()[self.current_step['output_path']]
+            response = self.__send_request().json()
         except KeyError:
             return -1
         else:
@@ -177,6 +177,16 @@ class Parsify(Handbook):
             self.chainshot(chain_id=chid)
 
         return self.results[self.current_parser['scope']]
+
+    def parse(self) -> dict:
+        """Runs all the parsers.
+        :return: Final dictionary of results collected from parsers.
+        """
+        scopes = [p['scope'] for p in self.handbook['parsers']]
+        for scope in scopes:
+            self.scopeshot(parser=scope)
+
+        return self.results
 
     def __send_request(self) -> requests.Response:
         return requests.request(
@@ -285,7 +295,7 @@ class Parsify(Handbook):
     def __list_handler(self, response: list) -> list:
         result = list()
         for elem in response:
-            if  not self.current_step['output']['key']:
+            if not self.current_step['output']['key']:
                 result.append(elem)
             elif self.current_step['output']['key'] in elem:
                 result.append(elem[self.current_step['output']['key']])
@@ -299,7 +309,13 @@ class Parsify(Handbook):
         return result
 
     def __output_handler(self, response: list):
-        return self.__list_handler(response=response)
+        address = self.current_step['output_path'].split('.')
+        output = response
+
+        for sub in address:
+            output = output[sub]
+
+        return self.__list_handler(response=output)
 
     def __reset_icfg(self):
         """Reset iterator config

@@ -1,1 +1,1 @@
-from parsify.parsify import Parsify, Handbook
+from parsify.parsify import Engine, Handbook
