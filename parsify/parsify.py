@@ -112,7 +112,7 @@ class Engine(Handbook):
         except KeyError:
             return -1
         else:
-            if len(response) == 0:
+            if not response:
                 return -1
 
         return self.__output_handler(response=response)
@@ -315,7 +315,7 @@ class Engine(Handbook):
         for sub in address:
             output = output[sub]
 
-        return self.__list_handler(response=output)
+        return self.__list_handler(response=output) if output else -1
 
     def __reset_icfg(self):
         """Reset iterator config
