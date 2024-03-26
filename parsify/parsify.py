@@ -313,7 +313,10 @@ class Engine(Handbook):
         output = response
 
         for sub in address:
-            output = output[sub]
+            try:
+                output = output[sub]
+            except (KeyError, TypeError):
+                return -1
 
         return self.__list_handler(response=output) if output else -1
 
