@@ -109,7 +109,7 @@ class Engine(Handbook):
 
         try:
             response = self.__send_request().json()
-        except KeyError:
+        except (KeyError, requests.exceptions.JSONDecodeError):
             return -1
         else:
             if not response:
