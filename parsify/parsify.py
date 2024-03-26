@@ -109,7 +109,7 @@ class Engine(Handbook):
 
         try:
             response = self.__send_request().json()
-        except (KeyError, requests.exceptions.JSONDecodeError):
+        except (KeyError, TypeError, IndexError, requests.exceptions.JSONDecodeError):
             return -1
         else:
             if not response:
@@ -315,7 +315,7 @@ class Engine(Handbook):
         for sub in address:
             try:
                 output = output[sub]
-            except (KeyError, TypeError):
+            except (KeyError, TypeError, IndexError):
                 return -1
 
         return self.__list_handler(response=output) if output else -1
